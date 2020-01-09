@@ -1,0 +1,81 @@
+Overview
+--------
+This program adds string values to set of linked list. Initially the first linked list is sorted in ascending order of values.
+A coin is flipped on every insertion to the list. If flip returns 1, the string is added to next higher level linked list. 
+It forms a hierarchy of linkedlist in higher level until flip returns 0.
+
+The solution uses below information from the input from user.
+
+-array/random - to check if flip is random or to be taken from array.
+-add - key adds string value after it
+-Find- key searches each level of hierarchy for the given string.
+
+To add new String to the Linked list.
+
+-create a array of Node with head pointing to next node and bottom node, which holds a string value.
+-create a Current Node (currNode) which starts at head node (each level of hierarchy) two strings.
+-point currNode to next node to compare two strings.
+
+To find the String in the Linked list .
+
+-search from top index of array of Nodes with head pointing to next node and bottom node,
+ which holds a string value check if the string matches.
+
+File
+----
+
+There are six files in this program.
+	-SortedLinkedList.java - program to add element to linked list and check if flip returns 1 and add to corresponding higher hierarchy.
+	-ListHierarchy.java - program to create instance of SortedLinkedList and Coin, to invoke addNewNode and findNode in SortedLinkedList.
+	-ArrayCoin.java - to invoke flip method and return flip values from array.
+	-Coin.java - Interface for flip method
+	-RandomCoin.java - to invoke flip method and return flip values randomly
+	-SkipUI.java - main program to add and find string in sorted list.
+	
+						
+
+
+Data structures and their relations to each other
+-------------------------------------------------
+
+The program uses Linked list implementation (Node class) with next and bottom as attributes to traverse.
+Initialized head node as array and index is initially 0 at the bottom for full sorted linked list.
+If coin flip returns 1, index is incremented and that string will be added to next index of  Node(i.e. Next higher level hierarchy).
+This process is continued until flip returns 0 for each value added.
+
+Find string in array of linkedlist- checks for similar string in top most hierarchy.
+If not found checks if string greater than the currnode and currnode.next .
+if yes, then currNode.bottom (bottom hierarchy ) is checked for the given string.
+The process continues till the last bottom level hierarchy.
+
+Assumptions
+-----------
+
+- String comparison is based on ASCII value for each characters in the string.
+- String comparison works for special characters as well.
+-Top hierarchy has only one element in it. then next lower node is checked for string in between cases.
+
+
+Key algorithms and design elements
+----------------------------------
+
+The program mimics binary search tree through set of linkedlist.
+
+add-- This method adds string value to a sorted linked list. Checks for Coin flip and pushes the value to higher hierarchy if flip returned 1.
+		Adds the string to the bottom most hierarchy initially.
+		Flips the Coin, if 1 adds the string to next level of hierarchy.
+		once added, again the coin is flipped.
+		This process is continued until flip returns 0.
+
+find-- This method finds if the string is there in the linkedlist.
+		Searches from the top most hierarchy, if not found, checks if the string is in between two strings.
+		If yes, then iterates to the current Nodes bottom value(i.e the immediate low hierarchy). and checks for the string.
+		This process continues until last bottom hierarchy is reached.
+		If the string was found then returns true. else false.
+		
+		
+ 
+Limitation
+----------
+-This code supports only 1000 hierarchy levels.
+
